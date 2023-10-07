@@ -28,9 +28,16 @@ function App() {
     },
   ];
 
+  const addNewExpense = (expense) => {
+    const newExpense = expense;
+
+    console.log("new expense in App.jsx");
+    console.log(newExpense);
+  };
+
   return (
     <>
-      <NewExpense></NewExpense>
+      <NewExpense onAddNewExpense={addNewExpense} />
       <Expenses expenses={expenses} />
     </>
   );

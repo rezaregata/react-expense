@@ -1,7 +1,8 @@
+/* eslint-disable react/prop-types */
 import { useState } from "react";
 import "./ExpenseForm.css";
 
-export default function ExpenseForm() {
+export default function ExpenseForm(props) {
   // multiple state
   const [title, setTitle] = useState("");
   const [amount, setAmount] = useState("");
@@ -32,21 +33,37 @@ export default function ExpenseForm() {
     }
   };
 
+  const submitHandler = (event) => {
+    event.preventDefault();
+    const expenseData = {
+      title: title,
+      amount: amount,
+      date: new Date(date),
+    };
+
+    // console.log(expenseData);
+    props.onSaveExpenseData(expenseData);
+    setTitle("");
+    setAmount("");
+    setDate("");
+  };
+
   return (
-    <form>
+    <form onSubmit={submitHandler}>
       <div className="new-expense__controls">
         <div className="new-expense__control">
           <label>Title</label>
           {/* <input type="text" onChange={titleChangeHandler} /> */}
           <input
             type="text"
+            value={title}
             onChange={(event) =>
               inputChangeHandler("title", event.target.value)
             }
           />
         </div>
         <div className="new-expense__control">
-          <label>Ampunt</label>
+          <label>Amount</label>
           {/* <input
             type="number"
             min="0.01"
@@ -55,6 +72,7 @@ export default function ExpenseForm() {
           /> */}
           <input
             type="text"
+            value={amount}
             onChange={(event) =>
               inputChangeHandler("amount", event.target.value)
             }
@@ -69,7 +87,8 @@ export default function ExpenseForm() {
             onChange={dateChangeHandler}
           /> */}
           <input
-            type="text"
+            type="date"
+            value={date}
             onChange={(event) => inputChangeHandler("date", event.target.value)}
           />
         </div>
