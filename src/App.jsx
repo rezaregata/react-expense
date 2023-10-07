@@ -3,6 +3,7 @@
 // import viteLogo from "/vite.svg";
 import "./App.css";
 import Expenses from "./components/Expenses/Expenses";
+import NewExpense from "./components/NewExpenses/NewExpenses";
 
 function App() {
   const expenses = [
@@ -29,7 +30,7 @@ function App() {
 
   return (
     <>
-      <h2>Lets Start</h2>
+      <NewExpense></NewExpense>
       <Expenses expenses={expenses} />
     </>
   );
