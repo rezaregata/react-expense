@@ -6,17 +6,27 @@ import ExpenseItem from "./ExpenseItem";
 import "./Expenses.css";
 
 export default function Expenses(props) {
-  const [expenseYear, setExpenseYear] = useState(undefined);
+  const [expenseYear, setExpenseYear] = useState("2019");
+  let filterInfoYears = "2020, 2021 & 2022";
 
-  const onChangeExpenseYear = (year) => {
+  if (expenseYear === "2020") {
+    filterInfoYears = "2019, 2021 & 2022";
+  } else if (expenseYear === "2021") {
+    filterInfoYears = "2019, 2020 & 2022";
+  } else if (expenseYear === "2022") {
+    filterInfoYears = "2019, 2020 & 2021";
+  } else {
+    filterInfoYears = "2020, 2021 & 2022";
+  }
+
+  const onChangeFilter = (year) => {
     setExpenseYear(year);
-    // if (expenseYear === '2019') {
     console.log(year);
-    // }
   };
   return (
     <Card className="expenses">
-      <ExpensesFilter expenseYear={onChangeExpenseYear} />
+      <ExpensesFilter expenseYear={onChangeFilter} />
+      <p>Data for years {filterInfoYears} are hidden</p>
       <ExpenseItem
         title={props.expenses[0].title}
         amount={props.expenses[0].amount}
